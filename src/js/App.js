@@ -4,7 +4,22 @@ import '../css/reset.css'
 import '../css/App.css';
 
 class App extends Component {
+    constructor(){
+        super();
+        this.state = {
+            wzgd: [],
+        }
+    }
     componentDidMount = function () {
+        $.ajax({
+            'url': 'http://192.168.43.151:8005/wzgd',
+            'type': 'get',
+            'success': function (a) {
+                console.log(a)
+                this.setState({wzgd: a});
+            }.bind(this)
+        })
+
         $.easing['jswing'] = $.easing['swing'];
         $.extend($.easing,
             {
@@ -35,6 +50,12 @@ class App extends Component {
             $(this).addClass('line').siblings().removeClass('line');
             $('.tit').eq(index).addClass('hcon').siblings().removeClass('hcon');
             $('.tit').eq(index).find('div').stop().slideDown().parent().siblings().children('div').stop().slideUp();
+        });
+        $('.stu li').click(function () {
+            var index=$(this).index();
+            $(this).addClass('line').siblings().removeClass('line');
+            $('.tit2').eq(index).addClass('hcon').siblings().removeClass('hcon');
+            $('.tit2').eq(index).find('div').stop().slideDown().parent().siblings().children('div').stop().slideUp();
         })
 
     }
@@ -69,7 +90,7 @@ class App extends Component {
                                 {/*我们的学员*/}
                                 <li className="level1">
                                     <a href="javascript:;">我们的学员<span></span></a>
-                                    <ul className="level2">
+                                    <ul className="level2 stu">
                                         <li>banner更改</li>
                                         <li>编辑学员资料</li>
                                     </ul>
@@ -131,36 +152,49 @@ class App extends Component {
                         {/*右侧面板*/}
                         <div className="main_right">
                             {/*首页*/}
-                            <div className="on con_index">
-                                <p className="tit">
+                            <div className="on">
+                                <div className="tit">
                                     banner更改
-                                    <div className="con">
-
-                                    </div>
-                                </p>
-                                <p className="tit">
+                                    <div className="con">111</div>
+                                </div>
+                                <div className="tit">
                                     文字滚动
-                                    <div className="con">222</div>
-                                </p>
-                                <p className="tit">
+                                    <div className="con">
+                                        <ul>
+                                            {this.state.wzgd.map(function (e) {
+                                                return <li key={e.id}>{e.news}</li>
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="tit">
                                     教师团队
                                     <div className="con">333</div>
-                                </p>
+                                </div>
 
-                                <p className="tit">
+                                <div className="tit">
                                     优秀学员
                                     <div className="con">444</div>
-                                </p>
-                                <p className="tit">
+                                </div>
+                                <div className="tit">
                                     新闻动态
                                     <div className="con">55</div>
-                                </p>
+                                </div>
 
                             </div>
                             {/*首页end*/}
 
                             {/*我们的学员*/}
-                            <div>22222</div>
+                            <div>
+                                <div className="tit tit2">
+                                    banner更改
+                                    <div className="con">111</div>
+                                </div>
+                                <div className="tit tit2">
+                                    编辑学员资料
+                                    <div className="con">222</div>
+                                </div>
+                            </div>
                             {/*我们的学员end*/}
 
                             {/*我们的教师*/}
