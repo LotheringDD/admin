@@ -155,7 +155,8 @@
 
 .con{
     width: 100%;
-    height: 200px;
+    padding: 20px 10px;
+    box-sizing: border-box;
     margin-bottom: 15px;
     background-color: #FFFFFF;
     color: #2C2C2C;
@@ -164,4 +165,83 @@
 }
 .tit.hcon{
     background-color: #E7355C;
+}
+
+/*教师团队*/
+.teachers{
+    width: 100%;
+    height: 60px;
+    float: left;
+}
+.teachers img{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+.teachers span{
+    width: 200px;
+    height: 60px;
+    display: block;
+    float: left;
+}
+
+/*优秀学员*/
+.great{
+    width: 100%;
+    height: 200px;
+    float: left;
+}
+.great>dd{
+    width: 600px;
+    height: 150px;
+    float: left;
+}
+.s_name{
+    width: 100px;
+    height: 150px;
+    float: left;
+}
+.lvli{
+    width: 500px;
+    height: 80px;
+    float: left;
+}
+.lvli>p{
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+}
+.great>dt{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+.great>dt>img{
+    width: 100%;
+    height: 100%;
+}
+
+/*新闻动态*/
+.news{
+    width: 100%;
+    height: 150px;
+    float: left;
+}
+.news dt{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+.news dt img{
+    width: 100%;
+    height: 100%;
+}
+.news dd{
+    width: 600px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    float: left;
 }

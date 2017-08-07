@@ -8,9 +8,13 @@ class App extends Component {
         super();
         this.state = {
             wzgd: [],
+            jstd: [],
+            yxxy: [],
+            xwdt: [],
         }
     }
     componentDidMount = function () {
+        // 文字滚动
         $.ajax({
             'url': 'http://192.168.43.151:8005/wzgd',
             'type': 'get',
@@ -19,6 +23,32 @@ class App extends Component {
                 this.setState({wzgd: a});
             }.bind(this)
         })
+
+        //教师团队
+        $.ajax({
+            'url': 'http://192.168.43.151:8005/jstd',
+            'type': 'get',
+            'success': function (opt) {
+                this.setState({jstd: opt});
+            }.bind(this)
+        });
+        // 优秀学员
+        $.ajax({
+            'url': 'http://192.168.43.151:8005/yxxy',
+            'type': 'get',
+            'success': function (b) {
+                this.setState({yxxy: b});
+            }.bind(this)
+        })
+        // 新闻动态
+        $.ajax({
+            'url': 'http://192.168.43.151:8005/xwdt',
+            'type': 'get',
+            'success': function (c) {
+                this.setState({xwdt: c});
+            }.bind(this)
+        })
+
 
         $.easing['jswing'] = $.easing['swing'];
         $.extend($.easing,
@@ -169,16 +199,52 @@ class App extends Component {
                                 </div>
                                 <div className="tit">
                                     教师团队
-                                    <div className="con">333</div>
+                                    <div className="con">
+                                        {this.state.jstd.map(function (e) {
+                                            return <div className="teachers" key={e.id}>
+                                                <span>{e.name}</span>
+                                                <span>{e.job}</span>
+                                                <img src={e.img}/>
+                                            </div>
+                                        })}
+                                    </div>
                                 </div>
 
                                 <div className="tit">
                                     优秀学员
-                                    <div className="con">444</div>
+                                    <div className="con">
+                                        {this.state.yxxy.map(function (e) {
+                                            return <dl className="great" key={e.id}>
+                                                <dd>
+                                                    <div className="s_name">{e.name}</div>
+                                                    <div className="lvli">
+                                                        <p>{e.p1}</p>
+                                                        <p>{e.p2}</p>
+                                                        <p>{e.p3}</p>
+                                                        <p>{e.p4}</p>
+                                                        <p className="pink">{e.pink}</p>
+                                                    </div>
+                                                </dd>
+                                                <dt><img src={e.img}/></dt>
+                                            </dl>
+                                        })}
+                                    </div>
                                 </div>
                                 <div className="tit">
                                     新闻动态
-                                    <div className="con">55</div>
+                                    <div className="con">
+                                        {this.state.xwdt.map(function (e) {
+                                            return <dl className="news" key={e.id}>
+                                                <dd>{e.ri}  {e.month}</dd>
+                                                <dd className="new_time">{e.time}</dd>
+                                                <dd className="new_title">{e.tit}</dd>
+                                                <dd className="desc">{e.desc}</dd>
+                                                <dt>
+                                                    <img src={e.img}/>
+                                                </dt>
+                                            </dl>
+                                        })}
+                                    </div>
                                 </div>
 
                             </div>
